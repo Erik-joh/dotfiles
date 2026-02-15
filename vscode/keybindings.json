@@ -34,7 +34,7 @@
   {
     "key": "space ,",
     "command": "workbench.action.showAllEditors",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && !claude-vscode.sideBarActive"
   },
 
   {
@@ -46,7 +46,7 @@
         "workbench.files.action.focusFilesExplorer"
       ]
     },
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && !sideBarFocus"
+    "when": "vim.mode == 'Normal' && editorTextFocus && !sideBarFocus"
   },
   {
     "key": "space e",
@@ -54,7 +54,7 @@
     "args": {
       "commands": ["workbench.action.toggleSidebarVisibility"]
     },
-    "when": "sideBarFocus && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "space e",
@@ -131,7 +131,7 @@
   {
     "key": "space g g",
     "command": "runCommands",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && !claude-vscode.sideBarActive",
     "args": {
       "commands": ["workbench.view.scm", "workbench.scm.focus"]
     }

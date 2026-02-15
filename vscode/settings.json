@@ -5,10 +5,10 @@
       "before": ["<Esc>"],
       "when": ["editorFocus"],
       "commands": [":nohl"],
-      "silent": true,
+      "silent": true
     },
     { "before": ["<C-d>"], "after": ["<C-d>", "z", "z"] },
-    { "before": ["<C-u>"], "after": ["<C-u>", "z", "z"] },
+    { "before": ["<C-u>"], "after": ["<C-u>", "z", "z"] }
   ],
   "vim.leader": " ",
   "vim.incsearch": true,
@@ -21,7 +21,7 @@
   "vim.smartRelativeLine": true,
   "vim.surround": true,
   "extensions.experimental.affinity": {
-    "vscodevim.vim": 1,
+    "vscodevim.vim": 1
   },
 
   // Theme
@@ -57,7 +57,7 @@
     "editorOverviewRuler.addedForeground": "#16ed4f30",
     "editorOverviewRuler.deletedForeground": "#0000",
     "editorOverviewRuler.infoForeground": "#0000",
-    "editorOverviewRuler.bracketMatchForeground": "#0000",
+    "editorOverviewRuler.bracketMatchForeground": "#0000"
     // ruler colors END
   },
   "editor.tokenColorCustomizations": {
@@ -96,13 +96,13 @@
           "text.html.basic entity.other.attribute-name",
           "tag.decorator.js entity.name.tag.js",
           "tag.decorator.js punctuation.definition.tag.js",
-          "source.js constant.other.object.key.js string.unquoted.label.js",
+          "source.js constant.other.object.key.js string.unquoted.label.js"
         ],
         "settings": {
-          "fontStyle": "italic",
-        },
-      },
-    ],
+          "fontStyle": "italic"
+        }
+      }
+    ]
   },
 
   //General
@@ -166,11 +166,12 @@
     "scrollDown": "ctrl+d",
     "scrollLeft": "ctrl+h",
     "scrollRight": "ctrl+l",
-    "promptDelete": "backspace",
+    "promptDelete": "backspace"
   },
   "codeTelescope.preview.showLineNumbers": true,
   "codeTelescope.layout.resultsFontSize": 14,
   "codeTelescope.layout.promptFontSize": 14,
   "codeTelescope.layout.previewFontSize": 14,
   "codeTelescope.layout.mode": "classic",
+  "claudeCode.preferredLocation": "panel"
 }

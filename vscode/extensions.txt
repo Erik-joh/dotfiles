@@ -1,3 +1,4 @@
+anthropic.claude-code
 eamodio.gitlens
 esbenp.prettier-vscode
 guichina.code-telescope

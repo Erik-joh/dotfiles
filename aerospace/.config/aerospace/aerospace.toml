@@ -1,4 +1,3 @@
-
 config-version = 2
 
 # In i3, all workspaces are phantom
@@ -45,12 +44,12 @@ outer.top = 2
 
     # Consider using 'join-with' command as a 'split' replacement if you want to enable
     # normalizations
-    alt-h = 'split horizontal'
+    alt-s = 'split horizontal'
     alt-v = 'split vertical'
 
     alt-f = 'fullscreen'
 
-    alt-s = 'layout v_accordion' # 'layout stacking' in i3
+    alt-b = 'layout v_accordion' # 'layout stacking' in i3
     alt-w = 'layout h_accordion' # 'layout tabbed' in i3
     alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
 

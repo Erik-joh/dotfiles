@@ -129,3 +129,4 @@ fpath=(~/.docker/completions \/Users/erijox/.oh-my-zsh/plugins/git /Users/erijox
 autoload -Uz compinit
 compinit
 export PATH="$HOME/.local/bin:$PATH"
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

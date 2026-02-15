@@ -3,7 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
-plugins=(git)
+plugins=(git auto-notify)
 
 # Show last 3 directories in path
 prompt_dir() {
@@ -20,6 +20,13 @@ prompt_dir() {
 source $ZSH/oh-my-zsh.sh
 
 PROMPT='%F{green}➜  %B%F{cyan}$(prompt_dir)%f $(git_prompt_info)'
+
+# Ignore certain commands
+export AUTO_NOTIFY_IGNORE=("docker" "vim" "man" "less")
+
+# Notification title/body format
+export AUTO_NOTIFY_TITLE="Done: %command"
+export AUTO_NOTIFY_BODY="Finished in %elapsed seconds"
 
 [ -f ~/.zshrc_secrets ] && source ~/.zshrc_secrets
 

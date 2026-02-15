@@ -42,6 +42,13 @@ if [ ! -d "$HOME/.nvm" ]; then
     nvm install --lts
 fi
 
+# zsh-auto-notify plugin
+AUTO_NOTIFY_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/auto-notify"
+if [ ! -d "$AUTO_NOTIFY_DIR" ]; then
+    echo "Installing zsh-auto-notify..."
+    git clone https://github.com/MichaelAquilina/zsh-auto-notify.git "$AUTO_NOTIFY_DIR"
+fi
+
 # VS Code extensions
 if command -v code &> /dev/null; then
     echo "Installing VS Code extensions..."

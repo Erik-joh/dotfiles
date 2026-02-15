@@ -356,5 +356,20 @@
     "key": "shift+cmd+d",
     "command": "-workbench.view.debug",
     "when": "viewContainer.workbench.view.debug.enabled"
+  },
+
+  // Claude
+  {
+    "key": "cmd+escape",
+    "command": "runCommands",
+    "args": {
+      "commands": ["claude-vscode.sidebar.open"]
+    },
+    "when": "!claude-vscode.sideBarActive"
+  },
+  {
+    "key": "cmd+escape",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "claude-vscode.sideBarActive && !editorTextFocus"
   }
 ]

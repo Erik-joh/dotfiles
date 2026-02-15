@@ -1,0 +1,9 @@
+eamodio.gitlens
+esbenp.prettier-vscode
+guichina.code-telescope
+pkief.material-icon-theme
+shd101wyy.markdown-preview-enhanced
+styled-components.vscode-styled-components
+supermaven.supermaven
+vscodevim.vim
+zhuangtongfa.material-theme

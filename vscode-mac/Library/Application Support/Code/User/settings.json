@@ -1,0 +1,176 @@
+{
+  //Vim
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<Esc>"],
+      "when": ["editorFocus"],
+      "commands": [":nohl"],
+      "silent": true,
+    },
+    { "before": ["<C-d>"], "after": ["<C-d>", "z", "z"] },
+    { "before": ["<C-u>"], "after": ["<C-u>", "z", "z"] },
+  ],
+  "vim.leader": " ",
+  "vim.incsearch": true,
+  "vim.searchHighlightColor": "#f6ff0080",
+  "vim.searchHighlightTextColor": "#fff",
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.highlightedyank.enable": true,
+  "vim.smartRelativeLine": true,
+  "vim.surround": true,
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1,
+  },
+
+  // Theme
+  "oneDarkPro.bold": true,
+  "oneDarkPro.vivid": true,
+  "breadcrumbs.icons": false,
+  "breadcrumbs.enabled": false,
+  "breadcrumbs.symbolPath": "off",
+  "workbench.colorTheme": "One Dark Pro Night Flat",
+  "editor.fontSize": 16,
+  "editor.lineHeight": 23,
+  "editor.fontFamily": "JetBrains Mono, Fira Code, Courier New, monospace",
+  "editor.minimap.enabled": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "window.systemColorTheme": "dark",
+  "window.density.editorTabHeight": "compact",
+  "workbench.activityBar.location": "top",
+  "workbench.colorCustomizations": {
+    // ruler colors START
+    "editorOverviewRuler.border": "#0000",
+    "editor.lineHighlightBackground": "#ffffff05",
+    "editor.lineHighlightBorder": "#2a2e3610",
+    "editor.hoverHighlightBackground": "#00000000",
+    "editor.wordHighlightBackground": "#00000000",
+    "editor.wordHighlightStrongBackground": "#00000000",
+    "editor.wordHighlightBorder": "#00000000",
+    "editorOverviewRuler.findMatchForeground": "#f6ff0065",
+    "editorOverviewRuler.rangeHighlightForeground": "#0000",
+    "editorOverviewRuler.selectionHighlightForeground": "#0000",
+    "editorOverviewRuler.wordHighlightForeground": "#0000",
+    "editorOverviewRuler.wordHighlightStrongForeground": "#0000",
+    "editorOverviewRuler.modifiedForeground": "#16ed4f30",
+    "editorOverviewRuler.addedForeground": "#16ed4f30",
+    "editorOverviewRuler.deletedForeground": "#0000",
+    "editorOverviewRuler.infoForeground": "#0000",
+    "editorOverviewRuler.bracketMatchForeground": "#0000",
+    // ruler colors END
+  },
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        // For 'One Dark Pro' theme. Remove this rule if you want to delete italics.
+        "name": "italic font",
+        "scope": [
+          "comment",
+          "keyword",
+          "storage",
+          "keyword.control",
+          "keyword.control.from",
+          "keyword.control.flow",
+          "keyword.operator.new",
+          "keyword.control.import",
+          "keyword.control.export",
+          "keyword.control.default",
+          "keyword.control.trycatch",
+          "keyword.control.conditional",
+          "storage.type",
+          "storage.type.class",
+          "storage.modifier.tsx",
+          "storage.type.function",
+          "storage.modifier.async",
+          "variable.language",
+          "variable.language.this",
+          "variable.language.super",
+          "meta.class",
+          "meta.var.expr",
+          "constant.language.null",
+          "support.type.primitive",
+          "entity.name.method.js",
+          "entity.other.attribute-name",
+          "punctuation.definition.comment",
+          "text.html.basic entity.other.attribute-name",
+          "tag.decorator.js entity.name.tag.js",
+          "tag.decorator.js punctuation.definition.tag.js",
+          "source.js constant.other.object.key.js string.unquoted.label.js",
+        ],
+        "settings": {
+          "fontStyle": "italic",
+        },
+      },
+    ],
+  },
+
+  //General
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.editor.limit.value": 5,
+  "workbench.editor.limit.enabled": true,
+  "editor.cursorSmoothCaretAnimation": "off",
+  "editor.lineNumbers": "relative",
+  "workbench.editor.editorActionsLocation": "titleBar",
+  "window.title": "${activeRepositoryName}",
+  "workbench.editor.showTabIndex": true,
+  "editor.cursorBlinking": "solid",
+  "editor.linkedEditing": true, // When you rename an HTML tag, it automatically renames the matching opening/closing tag too.
+  "editor.accessibilitySupport": "off", // Disables screen reader optimizations, which can improve performance if you don't need them.
+  "workbench.sideBar.location": "right",
+
+  // Git
+  "git.openRepositoryInParentFolders": "always", // If you open a subfolder, VS Code will still detect and use the git repo in a parent folder.
+  // git.enableSmartCommit: If you haven't staged anything, running "commit" will automatically stage all changes and commit them.
+  // git.confirmSync: Skips the confirmation dialog when pushing/pulling.
+  // git.autoStash: Automatically stashes and re-applies uncommitted changes when you pull, avoiding merge conflicts with dirty working trees.
+  // git.autofetch: Periodically fetches from remotes in the background so you can see if you're behind.
+
+  // Telemetry & Privacy
+  "telemetry.telemetryLevel": "off", // Disables all telemetry/data collection sent to Microsoft.
+  "telemetry.feedback.enabled": false, // Disables the feedback prompts.
+
+  // Workspace Trust (all disabled)
+  "security.workspace.trust.banner": "never", // Hides the "this workspace is untrusted" banner.
+  "security.workspace.trust.untrustedFiles": "open", // Opens untrusted files without prompting.
+  "security.workspace.trust.startupPrompt": "never", // Skips the trust prompt when opening a workspace.
+  "security.workspace.trust.enabled": false, // Completely disables the Workspace Trust feature. Essentially you're saying "I trust everything I open."
+
+  // UI / Workbench
+  "extensions.ignoreRecommendations": true, // Stops VS Code from suggesting extensions to install.
+  "workbench.layoutControl.enabled": false, // Hides the layout control button in the title bar.
+  "window.commandCenter": false, // Hides the command center (search bar) in the title bar.
+  "zenMode.fullScreen": false, // Zen Mode won't go fullscreen.
+  "zenMode.hideLineNumbers": false, // Zen Mode keeps line numbers visible.
+
+  // AI / Chat
+  "supermaven.enableJumpSuggestions": false,
+  "chat.agent.enabled": false,
+
+  //Gitlens
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "gitlens.defaultGravatarsStyle": "retro",
+  "gitlens.plusFeatures.enabled": false,
+  "gitlens.codeLens.enabled": false,
+
+  // Code Telescope
+  "codeTelescope.keybindings": {
+    "moveDown": "ctrl+j",
+    "moveUp": "ctrl+k",
+    "confirm": "enter",
+    "close": "escape",
+    "scrollUp": "ctrl+u",
+    "scrollDown": "ctrl+d",
+    "scrollLeft": "ctrl+h",
+    "scrollRight": "ctrl+l",
+    "promptDelete": "backspace",
+  },
+  "codeTelescope.preview.showLineNumbers": true,
+  "codeTelescope.layout.resultsFontSize": 14,
+  "codeTelescope.layout.promptFontSize": 14,
+  "codeTelescope.layout.previewFontSize": 14,
+  "codeTelescope.layout.mode": "classic",
+}

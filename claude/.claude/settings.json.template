@@ -1,4 +1,5 @@
 {
+  "editor": "/opt/homebrew/bin/nvim",
   "statusLine": {
     "type": "command",
     "command": "~/.local/bin/utils/claudeline.sh"

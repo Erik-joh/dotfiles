@@ -22,6 +22,7 @@ source $ZSH/oh-my-zsh.sh
 PROMPT='%F{green}➜  %B%F{cyan}$(prompt_dir)%f $(git_prompt_info)'
 
 # Ignore certain commands
+export EDITOR="nvim"
 export AUTO_NOTIFY_IGNORE=("docker" "vim" "man" "less")
 
 # Notification title/body format

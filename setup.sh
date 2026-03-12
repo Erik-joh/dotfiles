@@ -75,4 +75,10 @@ if [ "$OS" = "mac" ]; then
     killall Dock
 fi
 
+# Generate ~/.claude/settings.json from template + secrets
+if [ -f "$HOME/.zshrc_secrets" ]; then
+    source "$HOME/.zshrc_secrets"
+fi
+envsubst < "$DOTFILES/claude/.claude/settings.json.template" > "$HOME/.claude/settings.json"
+
 echo "Setup complete!"

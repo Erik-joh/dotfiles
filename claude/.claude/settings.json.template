@@ -1,0 +1,21 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "~/.local/bin/utils/claudeline.sh"
+  },
+  "mcpServers": {
+    "obsidian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-obsidian",
+        "/Users/erijox/Documents/ObsidianDocs"
+      ],
+      "env": {
+        "OBSIDIAN_API_KEY": "${OBSIDIAN_API_KEY}",
+        "OBSIDIAN_PROTOCOL": "https"
+      }
+    }
+  }
+}

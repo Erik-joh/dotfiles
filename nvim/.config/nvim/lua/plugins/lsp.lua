@@ -1,69 +1,105 @@
 return {
   {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "ts_ls", "eslint", "lua_ls" },
-        automatic_installation = true,
-      })
-    end,
-  },
-  {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
+      { "mason-org/mason.nvim", opts = {} },
+      "mason-org/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      { "j-hui/fidget.nvim", opts = {} },
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      local lspconfig = require("lspconfig")
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      -- Set up LSP keymaps on every buffer an LSP attaches to
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+        callback = function(event)
+          local map = function(keys, func, desc, mode)
+            vim.keymap.set(mode or "n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+          end
 
-      local on_attach = function(_, bufnr)
-        local map = function(keys, cmd, desc)
-          vim.keymap.set("n", keys, cmd, { buffer = bufnr, desc = desc })
-        end
+          map("gd",         vim.lsp.buf.definition,    "[G]oto [D]efinition")
+          map("gD",         vim.lsp.buf.declaration,   "[G]oto [D]eclaration")
+          map("gi",         vim.lsp.buf.implementation,"[G]oto [I]mplementation")
+          map("gt",         vim.lsp.buf.type_definition,"[G]oto [T]ype definition")
+          map("gr",         vim.lsp.buf.references,    "[G]oto [R]eferences")
+          map("K",          vim.lsp.buf.hover,         "Hover Documentation")
+          map("<leader>cr", vim.lsp.buf.rename,        "[C]ode [R]ename")
+          map("<leader>ca", vim.lsp.buf.code_action,   "[C]ode [A]ction", { "n", "x" })
+          map("<leader>cd", vim.diagnostic.open_float, "[C]ode [D]iagnostic float")
+          map("[d",         vim.diagnostic.goto_prev,  "Prev diagnostic")
+          map("]d",         vim.diagnostic.goto_next,  "Next diagnostic")
 
-        -- Go to (like <leader>gd/gr/gi in vscode)
-        map("<leader>gd", vim.lsp.buf.definition,      "Go to definition")
-        map("<leader>gr", "<cmd>Telescope lsp_references<CR>", "Go to references")
-        map("<leader>gi", vim.lsp.buf.implementation,  "Go to implementation")
-        map("<leader>gt", vim.lsp.buf.type_definition, "Go to type definition")
+          -- Highlight references of the word under cursor
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client:supports_method("textDocument/documentHighlight", event.buf) then
+            local au = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+              buffer = event.buf,
+              group = au,
+              callback = vim.lsp.buf.document_highlight,
+            })
+            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+              buffer = event.buf,
+              group = au,
+              callback = vim.lsp.buf.clear_references,
+            })
+            vim.api.nvim_create_autocmd("LspDetach", {
+              group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
+              callback = function(e)
+                vim.lsp.buf.clear_references()
+                vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = e.buf })
+              end,
+            })
+          end
 
-        -- Code actions (like <leader>ca / <leader>cr in vscode)
-        map("<leader>ca", vim.lsp.buf.code_action,     "Code action")
-        map("<leader>cr", vim.lsp.buf.rename,          "Rename")
-
-        -- Hover (like Shift-K in vscode)
-        map("K", vim.lsp.buf.hover, "Hover")
-
-        -- Diagnostics
-        map("<leader>cd", vim.diagnostic.open_float,   "Diagnostic float")
-        map("[d", vim.diagnostic.goto_prev,            "Prev diagnostic")
-        map("]d", vim.diagnostic.goto_next,            "Next diagnostic")
-      end
-
-      lspconfig.ts_ls.setup({ capabilities = capabilities, on_attach = on_attach })
-      lspconfig.eslint.setup({ capabilities = capabilities, on_attach = on_attach })
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+          -- Toggle inlay hints
+          if client and client:supports_method("textDocument/inlayHint", event.buf) then
+            map("<leader>th", function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+            end, "[T]oggle Inlay [H]ints")
+          end
+        end,
       })
 
-      -- Diagnostic signs
       vim.diagnostic.config({
         virtual_text = true,
         signs = true,
         underline = true,
         update_in_insert = false,
+        severity_sort = true,
+        float = { border = "rounded", source = "if_many" },
+        jump = { float = true },
       })
+
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      ---@type table<string, vim.lsp.Config>
+      local servers = {
+        ts_ls  = {},
+        eslint = {},
+        lua_ls = {
+          settings = {
+            Lua = {
+              diagnostics = { globals = { "vim" } },
+              workspace = { checkThirdParty = false },
+            },
+          },
+        },
+      }
+
+      -- Install LSP servers and formatters via Mason
+      require("mason-tool-installer").setup({
+        ensure_installed = vim.list_extend(vim.tbl_keys(servers), {
+          "prettier",
+          "stylua",
+        }),
+      })
+
+      for name, config in pairs(servers) do
+        config.capabilities = capabilities
+        vim.lsp.config(name, config)
+        vim.lsp.enable(name)
+      end
     end,
   },
 }

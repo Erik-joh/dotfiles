@@ -1,30 +1,33 @@
 local map = vim.keymap.set
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
--- Clear search highlights on Esc (like VS Code vim Esc → :nohl)
+-- Clear search highlights
 map("n", "<Esc>", "<cmd>nohl<CR>", { silent = true })
 
--- Scroll with centering (like C-d/C-u zz in vscode vim)
+-- Diagnostic quickfix list
+map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+
+-- Exit terminal mode
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- Scroll with centering
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
--- Split navigation (like ctrl-hjkl in vscode)
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
+-- Split navigation
+map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 
--- Split creation (like sh / sv in vscode)
+-- Split creation
 map("n", "sh", "<cmd>vsplit<CR>")
 map("n", "sv", "<cmd>split<CR>")
 
--- Buffer management (like <leader>bd / <leader>bo in vscode)
+-- Buffer management
 map("n", "<leader>bd", "<cmd>bd<CR>", { desc = "Close buffer" })
 map("n", "<leader>bo", "<cmd>%bd|e#|bd#<CR>", { desc = "Close other buffers" })
 
--- Move lines in visual line mode (like Shift-K/J in vscode visual line)
+-- Move lines in visual mode
 map("v", "K", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move lines up" })
 map("v", "J", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move lines down" })
 

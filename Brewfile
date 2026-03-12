@@ -1,4 +1,5 @@
 tap "nikitabobko/tap"
+brew "fd"
 brew "jq"
 brew "lazygit"
 brew "git-delta"

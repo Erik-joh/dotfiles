@@ -371,5 +371,9 @@
     "key": "cmd+escape",
     "command": "workbench.action.toggleSidebarVisibility",
     "when": "claude-vscode.sideBarActive && !editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+'",
+    "command": "editor.action.sortLinesAscending"
   }
 ]

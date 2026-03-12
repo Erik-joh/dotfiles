@@ -1,5 +1,7 @@
 tap "nikitabobko/tap"
 brew "jq"
+brew "lazygit"
+brew "git-delta"
 brew "neovim"
 brew "stow"
 brew "zsh"

@@ -81,4 +81,9 @@ if [ -f "$HOME/.zshrc_secrets" ]; then
 fi
 envsubst < "$DOTFILES/claude/.claude/settings.json.template" > "$HOME/.claude/settings.json"
 
+# Stow configs
+cd "$DOTFILES" || exit
+stow nvim
+stow lazygit
+
 echo "Setup complete!"

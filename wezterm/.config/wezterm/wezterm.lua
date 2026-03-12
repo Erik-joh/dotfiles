@@ -2,6 +2,37 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local config = wezterm.config_builder()
 
+-- Pre-create workspaces for each repo on startup
+wezterm.on('gui-startup', function()
+  local repos = {
+    'infra-platform',
+    'react_frontend',
+    'content-service',
+    'cms-site-builder',
+    'adapter',
+  }
+
+  local function setup_workspace(name, cwd)
+    local _, _, window = wezterm.mux.spawn_window {
+      workspace = name,
+      cwd = cwd,
+      args = { wezterm.home_dir .. '/.local/bin/claude' },
+    }
+    window:spawn_tab { cwd = cwd }
+    window:spawn_tab { cwd = cwd, args = { '/opt/homebrew/bin/nvim', '.' } }
+    window:spawn_tab { cwd = cwd, args = { '/opt/homebrew/bin/lazygit' } }
+  end
+
+  setup_workspace('dotfiles', wezterm.home_dir .. '/dotfiles')
+  for i, repo in ipairs(repos) do
+    local cwd = wezterm.home_dir .. '/Repo/' .. repo
+    setup_workspace(repo, cwd)
+    if i == 1 then
+      wezterm.mux.set_active_workspace(repo)
+    end
+  end
+end)
+
 -- Performance
 config.front_end = 'WebGpu'
 config.max_fps = 120
@@ -43,7 +74,28 @@ config.tab_max_width = 32
 
 config.color_scheme = 'Tokyo Night'
 
+-- Show workspace name in bottom-right of tab bar
+wezterm.on('update-status', function(window, pane)
+  local workspace = window:active_workspace()
+  window:set_right_status(wezterm.format {
+    { Foreground = { Color = '#7aa2f7' } },
+    { Text = '  ' .. workspace .. '  ' },
+  })
+end)
+
 config.keys = {
+  -- Workspaces
+  { key = 'o', mods = 'CMD', action = act.ShowLauncherArgs { flags = 'WORKSPACES' } },
+  { key = 'o', mods = 'CMD|SHIFT', action = act.PromptInputLine {
+      description = 'Enter workspace name',
+      action = wezterm.action_callback(function(window, pane, name)
+        if name then
+          window:perform_action(act.SwitchToWorkspace { name = name }, pane)
+        end
+      end),
+    }
+  },
+
   -- Tabs
   { key = 't', mods = 'CMD', action = act.SpawnTab 'CurrentPaneDomain' },
   { key = 'n', mods = 'CMD', action = act.ActivateTabRelative(1) },

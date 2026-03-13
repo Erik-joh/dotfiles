@@ -1,3 +1,16 @@
+-- Ensure NVM-managed node is on PATH (needed when nvim is launched without a login shell)
+local nvm_dir = vim.fn.expand("$HOME/.nvm")
+local nvm_default = nvm_dir .. "/alias/default"
+local f = io.open(nvm_default, "r")
+if f then
+  local version = f:read("*l"):gsub("%s+", "")
+  f:close()
+  local node_bin = nvm_dir .. "/versions/node/v" .. version .. "/bin"
+  if vim.fn.isdirectory(node_bin) == 1 then
+    vim.env.PATH = node_bin .. ":" .. vim.env.PATH
+  end
+end
+
 -- Leader keys must be set before plugins load
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "

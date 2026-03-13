@@ -30,4 +30,4 @@ os:
 git:
   pagers:
     - colorArg: always
-      pager: delta --dark --paging=never
+      pager: /opt/homebrew/bin/delta --dark --paging=never

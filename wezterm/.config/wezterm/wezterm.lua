@@ -16,7 +16,7 @@ wezterm.on('gui-startup', function()
     local _, _, window = wezterm.mux.spawn_window {
       workspace = name,
       cwd = cwd,
-      args = { wezterm.home_dir .. '/.local/bin/claude' },
+      args = { '/opt/homebrew/bin/opencode' },
     }
     window:spawn_tab { cwd = cwd }
     window:spawn_tab { cwd = cwd, args = { '/opt/homebrew/bin/nvim', '.' } }

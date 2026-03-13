@@ -23,6 +23,7 @@ return {
           map("gt",         vim.lsp.buf.type_definition,"[G]oto [T]ype definition")
           map("gr",         vim.lsp.buf.references,    "[G]oto [R]eferences")
           map("K",          vim.lsp.buf.hover,         "Hover Documentation")
+          map("gh",         vim.lsp.buf.hover,         "Hover Documentation")
           map("<leader>cr", vim.lsp.buf.rename,        "[C]ode [R]ename")
           map("<leader>ca", vim.lsp.buf.code_action,   "[C]ode [A]ction", { "n", "x" })
           map("<leader>cd", vim.diagnostic.open_float, "[C]ode [D]iagnostic float")

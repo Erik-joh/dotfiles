@@ -1,25 +1,10 @@
 return {
-	-- Theme: One Dark Pro (matches VSCode Binaryify/OneDark-Pro Night Flat exactly)
+	-- Theme: One Dark Pro (Night Flat colors)
 	{
 		"olimorris/onedarkpro.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			-- Exact colors from Binaryify/OneDark-Pro Night Flat
-			local C = {
-				bg       = "#16191d",
-				fg       = "#abb2bf",
-				red      = "#e06c75",  -- variables, parameters, properties
-				yellow   = "#e5c07b",  -- types, classes, constructors
-				green    = "#98c379",  -- strings
-				blue     = "#61afef",  -- functions, methods
-				cyan     = "#56b6c2",  -- support functions, built-ins
-				purple   = "#c678dd",  -- keywords, storage
-				orange   = "#d19a66",  -- numbers, constants
-				gray     = "#7f848e",  -- comments
-				dimgray  = "#4b5263",  -- line numbers
-			}
-
 			require("onedarkpro").setup({
 				styles = {
 					comments  = "italic",
@@ -28,152 +13,124 @@ return {
 					strings   = "italic",
 				},
 				options = { italic = true, bold = true },
-				-- Baked into the compiled theme cache — always applies
-				highlights = {
-					["@keyword"]             = { fg = C.purple, italic = true },
-					["@keyword.import"]      = { fg = C.purple, italic = true },
-					["@keyword.function"]    = { fg = C.purple, italic = true },
-					["@keyword.return"]      = { fg = C.purple, italic = true },
-					["@keyword.conditional"] = { fg = C.purple, italic = true },
-					["@keyword.repeat"]      = { fg = C.purple, italic = true },
-					["@keyword.exception"]   = { fg = C.purple, italic = true },
-					["@keyword.operator"]    = { fg = C.purple },
-					["@keyword.coroutine"]   = { fg = C.purple, italic = true },
-					["@variable"]            = { fg = C.red },
-					["@variable.builtin"]    = { fg = C.yellow },
-					["@variable.parameter"]  = { fg = C.red },
-					["@variable.member"]     = { fg = C.red },
-					["@function"]            = { fg = C.blue, italic = true },
-					["@function.call"]       = { fg = C.blue, italic = true },
-					["@function.method"]     = { fg = C.blue, italic = true },
-					["@function.method.call"]= { fg = C.blue, italic = true },
-					["@function.builtin"]    = { fg = C.cyan, italic = true },
-					["@constructor"]         = { fg = C.yellow },
-					["@type"]                = { fg = C.yellow },
-					["@type.builtin"]        = { fg = C.yellow },
-					["@module"]              = { fg = C.yellow },
-					["@constant"]            = { fg = C.orange },
-					["@constant.builtin"]    = { fg = C.yellow },
-					["@string"]              = { fg = C.green, italic = true },
-					["@string.special"]      = { fg = C.cyan },
-					["@number"]              = { fg = C.orange },
-					["@float"]               = { fg = C.orange },
-					["@comment"]             = { fg = C.gray, italic = true },
-					["@operator"]            = { fg = C.fg },
-					["@punctuation.bracket"] = { fg = C.fg },
-					["@punctuation.delimiter"]={ fg = C.fg },
-					-- LSP semantic tokens baked into theme cache
-					["@lsp.type.variable"]      = { fg = C.red },
-					["@lsp.type.parameter"]     = { fg = C.red },
-					["@lsp.type.property"]      = { fg = C.red },
-					["@lsp.type.function"]      = { fg = C.blue, italic = true },
-					["@lsp.type.method"]        = { fg = C.blue, italic = true },
-					["@lsp.type.type"]          = { fg = C.yellow },
-					["@lsp.type.class"]         = { fg = C.yellow },
-					["@lsp.type.interface"]     = { fg = C.yellow },
-					["@lsp.type.typeParameter"] = { fg = C.yellow },
-					["@lsp.type.namespace"]     = { fg = C.yellow },
-					["@lsp.type.enum"]          = { fg = C.yellow },
-					["@lsp.type.enumMember"]    = { fg = C.yellow },
-					["@lsp.type.keyword"]       = { fg = C.purple, italic = true },
-					["@lsp.type.string"]        = { fg = C.green, italic = true },
-					["@lsp.type.number"]        = { fg = C.orange },
-					["@lsp.type.comment"]       = { fg = C.gray, italic = true },
-					-- TS LSP modifiers
-					["@lsp.typemod.variable.readonly"]          = { fg = C.yellow },
-					["@lsp.typemod.variable.local"]             = { fg = C.red },
-					["@lsp.typemod.variable.defaultLibrary"]    = { fg = C.yellow },
-					["@lsp.typemod.variable.declaration"]       = { fg = C.red },
-					["@lsp.typemod.parameter.declaration"]      = { fg = C.red },
-					["@lsp.typemod.function.defaultLibrary"]    = { fg = C.cyan, italic = true },
-					["@lsp.typemod.function.declaration"]       = { fg = C.blue, italic = true },
-					["@lsp.typemod.function.async"]             = { fg = C.blue, italic = true },
-					["@lsp.typemod.method.declaration"]         = { fg = C.blue, italic = true },
-					["@lsp.typemod.class.defaultLibrary"]       = { fg = C.yellow },
-					["@lsp.typemod.class.declaration"]          = { fg = C.yellow },
-					["@lsp.typemod.interface.declaration"]      = { fg = C.yellow },
-					["@lsp.typemod.type.declaration"]           = { fg = C.yellow },
-					["@lsp.typemod.enum.declaration"]           = { fg = C.yellow },
-					["@lsp.typemod.typeParameter.declaration"]  = { fg = C.yellow },
-				},
 			})
-
 			vim.cmd("colorscheme onedark_vivid")
 
-			local hl = vim.api.nvim_set_hl
+			local C = {
+				bg      = "#16191d",
+				fg      = "#abb2bf",
+				red     = "#e06c75",
+				yellow  = "#e5c07b",
+				green   = "#98c379",
+				blue    = "#61afef",
+				cyan    = "#56b6c2",
+				purple  = "#c678dd",
+				orange  = "#d19a66",
+				gray    = "#7f848e",
+				dimgray = "#4b5263",
+			}
 
 			local function apply()
-				-- Background
-				hl(0, "Normal",      { bg = C.bg, fg = C.fg })
-				hl(0, "NormalNC",    { bg = C.bg })
-				hl(0, "NormalFloat", { bg = C.bg })
-				hl(0, "SignColumn",  { bg = C.bg })
+				local hl = vim.api.nvim_set_hl
 
-				-- Line numbers: dimmed, current line brighter but NO background bar
+				-- Background / chrome
+				hl(0, "Normal",       { bg = C.bg, fg = C.fg })
+				hl(0, "NormalNC",     { bg = C.bg })
+				hl(0, "NormalFloat",  { bg = C.bg })
+				hl(0, "SignColumn",   { bg = C.bg })
 				hl(0, "LineNr",       { fg = C.dimgray, bg = "NONE" })
-				hl(0, "CursorLineNr", { fg = C.fg,      bg = "NONE" })
+				hl(0, "CursorLineNr", { fg = C.fg, bg = "NONE" })
+				hl(0, "CursorLine",   { bg = "#1e2228" })
 
-				-- Cursor line: barely visible, just slightly lighter than bg (#16191d)
-				hl(0, "CursorLine", { bg = "#1e2228" })
-
-				-- Word/reference highlights: no background
+				-- Reference highlights: no background
 				hl(0, "LspReferenceText",  { bg = "NONE" })
 				hl(0, "LspReferenceRead",  { bg = "NONE" })
 				hl(0, "LspReferenceWrite", { bg = "NONE" })
 
-				hl(0, "String",  { fg = C.green, italic = true })
-				hl(0, "Comment", { fg = C.gray,  italic = true })
+				-- Core syntax (treesitter)
+				hl(0, "Comment",  { fg = C.gray,  italic = true })
+				hl(0, "String",   { fg = C.green, italic = true })
+				hl(0, "@comment", { fg = C.gray,  italic = true })
+				hl(0, "@string",  { fg = C.green, italic = true })
 
-				-- Base colors per LSP token type
-				local lsp_types = {
-					variable      = { fg = C.red },
-					parameter     = { fg = C.red },
-					property      = { fg = C.red },
-					["function"]  = { fg = C.blue, italic = true },
-					method        = { fg = C.blue, italic = true },
-					class         = { fg = C.yellow },
-					interface     = { fg = C.yellow },
-					type          = { fg = C.yellow },
-					enum          = { fg = C.yellow },
-					enumMember    = { fg = C.yellow },
-					typeParameter = { fg = C.yellow },
-					namespace     = { fg = C.yellow },
-					keyword       = { fg = C.purple, italic = true },
-					string        = { fg = C.green, italic = true },
-					number        = { fg = C.orange },
-					comment       = { fg = C.gray, italic = true },
+				hl(0, "@keyword",             { fg = C.purple, italic = true })
+				hl(0, "@keyword.import",      { fg = C.purple, italic = true })
+				hl(0, "@keyword.function",    { fg = C.purple, italic = true })
+				hl(0, "@keyword.return",      { fg = C.purple, italic = true })
+				hl(0, "@keyword.conditional", { fg = C.purple, italic = true })
+				hl(0, "@keyword.repeat",      { fg = C.purple, italic = true })
+				hl(0, "@keyword.exception",   { fg = C.purple, italic = true })
+				hl(0, "@keyword.operator",    { fg = C.purple })
+				hl(0, "@keyword.coroutine",   { fg = C.purple, italic = true })
+
+				hl(0, "@variable",           { fg = C.red })
+				hl(0, "@variable.builtin",   { fg = C.yellow })
+				hl(0, "@variable.parameter", { fg = C.red })
+				hl(0, "@variable.member",    { fg = C.red })
+
+				hl(0, "@function",             { fg = C.blue, italic = true })
+				hl(0, "@function.call",        { fg = C.blue, italic = true })
+				hl(0, "@function.method",      { fg = C.blue, italic = true })
+				hl(0, "@function.method.call", { fg = C.blue, italic = true })
+				hl(0, "@function.builtin",     { fg = C.cyan, italic = true })
+
+				hl(0, "@constructor",    { fg = C.yellow })
+				hl(0, "@type",           { fg = C.yellow })
+				hl(0, "@type.builtin",   { fg = C.yellow })
+				hl(0, "@module",         { fg = C.yellow })
+				hl(0, "@constant",       { fg = C.orange })
+				hl(0, "@number",         { fg = C.orange })
+				hl(0, "@float",          { fg = C.orange })
+				hl(0, "@operator",       { fg = C.fg })
+
+				-- LSP semantic tokens: set base type colors
+				local types = {
+					variable      = C.red,
+					parameter     = C.red,
+					property      = C.red,
+					["function"]  = C.blue,
+					method        = C.blue,
+					class         = C.yellow,
+					interface     = C.yellow,
+					type          = C.yellow,
+					enum          = C.yellow,
+					enumMember    = C.yellow,
+					typeParameter = C.yellow,
+					namespace     = C.yellow,
+					keyword       = C.purple,
+					string        = C.green,
+					number        = C.orange,
+					comment       = C.gray,
 				}
 
-				-- All known TS LSP modifiers
-				local lsp_mods = {
+				local mods = {
 					"declaration", "definition", "readonly", "static",
 					"async", "defaultLibrary", "local", "abstract",
 					"deprecated", "modification", "documentation",
 				}
 
-				-- Set @lsp.type.X and every @lsp.typemod.X.MOD combination
-				-- so no modifier combo can override our colors to white
-				for type_name, opts in pairs(lsp_types) do
-					hl(0, "@lsp.type." .. type_name, opts)
-					for _, mod in ipairs(lsp_mods) do
-						hl(0, "@lsp.typemod." .. type_name .. "." .. mod, opts)
+				-- Set every @lsp.type.X and @lsp.typemod.X.MOD
+				for t, color in pairs(types) do
+					local italic = (t == "function" or t == "method" or t == "keyword" or t == "string" or t == "comment")
+					hl(0, "@lsp.type." .. t, { fg = color, italic = italic })
+					for _, m in ipairs(mods) do
+						hl(0, "@lsp.typemod." .. t .. "." .. m, { fg = color, italic = italic })
 					end
 				end
 
-				-- Specific overrides that differ from base type color
+				-- Specific overrides that differ from base type
 				hl(0, "@lsp.typemod.variable.readonly",       { fg = C.yellow })
 				hl(0, "@lsp.typemod.variable.defaultLibrary", { fg = C.yellow })
 				hl(0, "@lsp.typemod.function.defaultLibrary", { fg = C.cyan, italic = true })
-				hl(0, "@lsp.typemod.class.defaultLibrary",    { fg = C.yellow })
 			end
 
-			-- Run after colorscheme, after startup, and after each LSP attach
-			vim.schedule(apply)
+			apply()
 			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function() vim.schedule(apply) end,
+				callback = apply,
 			})
+			-- Re-apply 200ms after LSP attaches (waits for semantic token render)
 			vim.api.nvim_create_autocmd("LspAttach", {
-				callback = function() vim.schedule(apply) end,
+				callback = function() vim.defer_fn(apply, 200) end,
 			})
 		end,
 	},

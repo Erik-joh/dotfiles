@@ -38,7 +38,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-alias ddocker="brew services start colima"
+[ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
 fpath=(~/.docker/completions \/Users/erijox/.oh-my-zsh/plugins/git /Users/erijox/.oh-my-zsh/functions /Users/erijox/.oh-my-zsh/completions /Users/erijox/.oh-my-zsh/custom/functions /Users/erijox/.oh-my-zsh/custom/completions /Users/erijox/.oh-my-zsh/cache/completions /usr/local/share/zsh/site-functions /usr/share/zsh/site-functions /usr/share/zsh/5.9/functions)
 autoload -Uz compinit

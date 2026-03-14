@@ -1,0 +1,5 @@
+# Docker
+alias ddocker="brew services start colima"
+
+# Brave Browser
+alias brave-debug='/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser --remote-debugging-port=9222'

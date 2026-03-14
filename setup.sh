@@ -85,5 +85,6 @@ envsubst < "$DOTFILES/claude/.claude/settings.json.template" > "$HOME/.claude/se
 cd "$DOTFILES" || exit
 stow nvim
 stow lazygit
+stow opencode
 
 echo "Setup complete!"

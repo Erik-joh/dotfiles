@@ -9,6 +9,7 @@ STOW_FILES=(
     ".profile"
     ".config/wezterm/wezterm.lua"
     ".config/aerospace/aerospace.toml"
+    ".config/opencode/config.json"
 )
 
 # Back up existing files
@@ -53,6 +54,7 @@ cd "$DOTFILES"
 stow -v zsh
 stow -v scripts
 stow -v wezterm
+stow -v opencode
 
 # macOS only
 if [[ "$OSTYPE" == "darwin"* ]]; then

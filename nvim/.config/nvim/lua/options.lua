@@ -21,7 +21,7 @@ opt.inccommand = "split" -- Live preview of substitutions
 -- UI
 opt.termguicolors = true
 opt.signcolumn = "yes"
-opt.cursorline = true
+opt.cursorline = false
 opt.scrolloff = 10
 opt.sidescrolloff = 8
 opt.wrap = false
@@ -35,7 +35,9 @@ opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 opt.fillchars = { eob = " " } -- hide ~ on empty lines
 
 -- Clipboard (scheduled to avoid startup slowdown)
-vim.schedule(function() opt.clipboard = "unnamedplus" end)
+vim.schedule(function()
+	opt.clipboard = "unnamedplus"
+end)
 
 -- Files
 opt.backup = false

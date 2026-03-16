@@ -6,7 +6,7 @@ return {
       "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       { "j-hui/fidget.nvim", opts = {} },
-      "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
     },
     config = function()
       -- Set up LSP keymaps on every buffer an LSP attaches to
@@ -72,7 +72,7 @@ return {
         jump = { float = true },
       })
 
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       ---@type table<string, vim.lsp.Config>
       local servers = {

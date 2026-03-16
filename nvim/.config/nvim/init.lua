@@ -36,11 +36,6 @@ vim.opt.rtp:prepend(lazypath)
 require("options")
 require("keymaps")
 
--- Compatibility shim: new treesitter removed ft_to_lang but telescope still calls it
-if vim.treesitter.language.get_lang and not vim.treesitter.language.ft_to_lang then
-  vim.treesitter.language.ft_to_lang = vim.treesitter.language.get_lang
-end
-
 -- Highlight yanked text (native, no plugin needed)
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",

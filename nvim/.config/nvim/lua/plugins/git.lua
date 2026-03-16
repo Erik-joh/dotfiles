@@ -4,8 +4,6 @@ return {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      -- Git panel (like <leader>gg in vscode → scm view)
-      { "<leader>gg", "<cmd>vertical Git<CR>", desc = "Git status" },
       { "<leader>gb", "<cmd>Gitsigns blame_line<CR>", desc = "Blame line" },
       { "]g", "<cmd>Gitsigns next_hunk<CR>", desc = "Next hunk" },
       { "[g", "<cmd>Gitsigns prev_hunk<CR>", desc = "Prev hunk" },
@@ -27,7 +25,4 @@ return {
       })
     end,
   },
-
-  -- Git commands (for <leader>gg → :vertical Git)
-  { "tpope/vim-fugitive", cmd = "Git" },
 }

@@ -4,11 +4,10 @@ return {
   config = function()
     require("supermaven-nvim").setup({
       keymaps = {
-        accept_suggestion = "<Tab>",
-        clear_suggestion  = "<C-]>",
-        accept_word       = "<C-j>",
+        accept_suggestion = nil,
+        clear_suggestion = "<C-]>",
+        accept_word = "<Tab>",
       },
-      ignore_filetypes = { "TelescopePrompt" },
       color = {
         suggestion_color = "#6b7280",
         cterm = 244,

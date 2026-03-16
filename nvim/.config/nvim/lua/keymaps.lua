@@ -1,5 +1,8 @@
 local map = vim.keymap.set
 
+-- Save with Cmd+S (Wezterm sends Ctrl+S)
+map({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file", silent = true })
+
 -- Clear search highlights
 map("n", "<Esc>", "<cmd>nohl<CR>", { silent = true })
 

@@ -110,9 +110,6 @@ config.keys = {
 	{ key = "4", mods = "CMD", action = act.ActivateTab(3) },
 	{ key = "5", mods = "CMD", action = act.ActivateTab(4) },
 
-	-- Splits (if you ever need them)
-	{ key = "s", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-
 	-- Navigate splits vim-style
 	{ key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left") },
 	{ key = "j", mods = "CMD", action = act.ActivatePaneDirection("Down") },
@@ -132,6 +129,9 @@ config.keys = {
 	{ key = "z", mods = "CMD", action = act.TogglePaneZoomState },
 	{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
 	{ key = "r", mods = "CMD", action = act.ReloadConfiguration },
+
+	-- Save (send Ctrl+S to Neovim since terminals can't pass Cmd)
+	{ key = "s", mods = "CMD", action = act.SendKey({ key = "s", mods = "CTRL" }) },
 
 	-- Clipboard
 	{ key = "c", mods = "CMD", action = act.CopyTo("Clipboard") },

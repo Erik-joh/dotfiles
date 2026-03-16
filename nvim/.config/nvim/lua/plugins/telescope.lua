@@ -25,7 +25,24 @@ return {
         },
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
-        file_ignore_patterns = { "node_modules", ".git/" },
+        file_ignore_patterns = { "node_modules", ".git/", ".dist" },
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
+          "--glob=!.git/",
+          "--glob=!.dist/",
+        },
+      },
+      pickers = {
+        find_files = {
+          hidden = true,
+        },
       },
       extensions = {
         ["ui-select"] = { require("telescope.themes").get_dropdown() },

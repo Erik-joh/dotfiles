@@ -7,16 +7,16 @@ return {
 		picker = {
 			enabled = true,
 			sources = {
-				files = {
-					hidden = true,
-					ignored = true,
-					exclude = { "node_modules", ".git", "dist", ".dist" },
-				},
-				grep = {
-					hidden = true,
-					ignored = true,
-					exclude = { "node_modules", ".git", "dist", ".dist" },
-				},
+			files = {
+				hidden = true,
+				ignored = false,
+				exclude = { "node_modules", ".git", "dist", ".dist" },
+			},
+			grep = {
+				hidden = true,
+				ignored = false,
+				exclude = { "node_modules", ".git", "dist", ".dist" },
+			},
 			},
 			layout = {
 				layout = {

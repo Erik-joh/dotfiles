@@ -11,6 +11,7 @@ return {
       { "<leader>h", group = "[H]arpoon" },
       { "<leader>b", group = "[B]uffer" },
       { "<leader>t", group = "[T]oggle" },
+      { "<leader>9", group = "[9]9 AI" },
     },
   },
 }
